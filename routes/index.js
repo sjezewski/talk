@@ -12,6 +12,13 @@ router.get('/', (req, res) => {
   });
 });
 
+router.get('/timemachine', (req, res) => {
+  return res.render('timemachine', {
+    title: 'Coral Talk',
+    basePath: '/client/embed/stream'
+  });
+});
+
 router.get('/assets/:asset_title', (req, res) => {
   return res.render('article', {
     title: req.params.asset_title.split('-').join(' '),

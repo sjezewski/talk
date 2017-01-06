@@ -96,9 +96,10 @@ export function getStream (assetUrl) {
   return (dispatch) => {
     return coralApi(`/stream?asset_url=${encodeURIComponent(assetUrl)}`)
       .then((json) => {
-
+        console.log('GOT SOME JSON:', json);
         /* Add items to the store */
         Object.keys(json).forEach(type => {
+          console.log('type:', type);
           if (type === 'actions') {
             json[type].forEach(action => {
               action.id = `${action.action_type}_${action.item_id}`;
