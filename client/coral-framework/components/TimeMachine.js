@@ -15,11 +15,16 @@ export default class TimeMachine extends Component {
     console.log('Time machine mounted');
   }
 
+  loadTimestamp = (e) => {
+    console.log('Going to update the comments');
+    console.log('Got value:', e);
+  }
+
   render () {
     return (
       <div className="tardis">
         <label htmlFor='timeline'> Timeline </label>
-        <input type='range' name='timeline'/>
+        <input type='range' name='timeline' onChange={this.loadTimestamp}/>
       </div>
     );
   }
