@@ -9,6 +9,8 @@ import {
   authActions
 } from '../../coral-framework';
 
+import TimeMachine from '../../coral-framework/components/TimeMachine';
+
 import CommentBox from '../../coral-plugin-commentbox/CommentBox';
 import InfoBox from '../../coral-plugin-infobox/InfoBox';
 import Content from '../../coral-plugin-commentcontent/CommentContent';
@@ -107,6 +109,7 @@ class CommentStream extends Component {
       {
         rootItem
           ? <div className="commentStream">
+          <TimeMachine />
           <TabBar onChange={this.changeTab} activeTab={activeTab}>
             <Tab><Count id={rootItemId} items={this.props.items}/></Tab>
             <Tab>Settings</Tab>
