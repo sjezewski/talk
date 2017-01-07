@@ -18,7 +18,8 @@ export default class TimeMachine extends Component {
   render () {
     return (
       <div className="tardis">
-      The Doctor
+        <label htmlFor='timeline'> Timeline </label>
+        <input type='range' name='timeline'/>
       </div>
     );
   }
