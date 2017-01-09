@@ -33,7 +33,7 @@ export class TimeMachine extends Component {
     console.log('Going to update the comments');
     console.log('Got value:', e);
 	// I want to fire an action here, e.g.
-	getStreamFromPFS("foo");
+	this.props.refreshComments("foo");
   }
 
   render () {
