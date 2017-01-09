@@ -24,6 +24,9 @@ export default (state = initialState, action) => {
         return prop ? prop.push(fromJS(action.value)) : fromJS([action.value]);
       }
     });
+  case actions.REFRESH_ITEMS:
+	console.log("Reducing REFRESH_ITEMS action");
+	return state;
   default:
     return state;
   }

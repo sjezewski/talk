@@ -37,6 +37,15 @@ well ... I could do it there ... I need to retrieve from PFS not actually do the
 I think the thing that makes the most sense is to do `getStreamFromPFS()` in items.js, and re-use the code in commong w `GetStream()`
 
 
+---
+
+
+OK ... So I have the `/timemachine` view loading the `CommentStream` object which in turn loads the `TimeMachine` object
+
+The `TimeMachine` object has a slider and an event handler. Next I need to:
+
+- have the event handler dispatch? a `loadCommentsAtCommit` action
+- then I need to write a new reducer on the `CommentStream` object so that the comments get updated properly
 
 
 

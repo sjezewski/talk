@@ -9,6 +9,15 @@ import {UPDATE_CONFIG} from '../constants/config';
 export const ADD_ITEM = 'ADD_ITEM';
 export const UPDATE_ITEM = 'UPDATE_ITEM';
 export const APPEND_ITEM_ARRAY = 'APPEND_ITEM_ARRAY';
+export const REFRESH_ITEMS = 'REFRESH_ITEMS';
+
+export const refreshItems = (items, item_type) => {
+	return {
+		type: REFRESH_ITEMS,
+		items,
+		item_type
+	}
+}
 
 /**
  * Action creators
@@ -79,6 +88,60 @@ export const appendItemArray = (id, property, value, add_to_front, item_type) =>
   };
 };
 
+
+function getStreamHelper(dispatch, json) {
+ console.log('GOT SOME JSON:', json);
+ /* Add items to the store */
+ Object.keys(json).forEach(type => {
+   console.log('type:', type);
+   if (type === 'actions') {
+     json[type].forEach(action => {
+       action.id = `${action.action_type}_${action.item_id}`;
+       dispatch(addItem(action, 'actions'));
+     });
+   } else if (type === 'settings') {
+     dispatch({type: UPDATE_CONFIG, config: fromJS(json[type])});
+   } else {
+     json[type].forEach(item => {
+       dispatch(addItem(item, type));
+     });
+   }
+ });
+
+ const assetId = json.assets[0].id;
+
+ /* Sort comments by date*/
+ json.comments.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
+ const rels = json.comments.reduce((h, item) => {
+
+   /* Check for root and child comments. */
+   if (
+     item.asset_id === assetId &&
+     !item.parent_id) {
+     h.rootComments.push(item.id);
+   } else if (
+     item.asset_id === assetId
+   ) {
+     let children = h.childComments[item.parent_id] || [];
+     h.childComments[item.parent_id] = children.concat(item.id);
+   }
+   return h;
+ }, {rootComments: [], childComments: {}});
+
+ dispatch(updateItem(assetId, 'comments', rels.rootComments, 'assets'));
+
+ Object.keys(rels.childComments).forEach(key => {
+   dispatch(updateItem(key, 'children', rels.childComments[key].reverse(), 'comments'));
+ });
+
+ /* Hydrate actions on comments */
+ json.actions.forEach(action => {
+   dispatch(updateItem(action.item_id, action.action_type, action.id, 'comments'));
+ });
+
+ return (json);
+}
+
 /*
 * Get Items from Query
 * Gets a set of items from a predefined query
@@ -96,60 +159,21 @@ export function getStream (assetUrl) {
   return (dispatch) => {
     return coralApi(`/stream?asset_url=${encodeURIComponent(assetUrl)}`)
       .then((json) => {
-        console.log('GOT SOME JSON:', json);
-        /* Add items to the store */
-        Object.keys(json).forEach(type => {
-          console.log('type:', type);
-          if (type === 'actions') {
-            json[type].forEach(action => {
-              action.id = `${action.action_type}_${action.item_id}`;
-              dispatch(addItem(action, 'actions'));
-            });
-          } else if (type === 'settings') {
-            dispatch({type: UPDATE_CONFIG, config: fromJS(json[type])});
-          } else {
-            json[type].forEach(item => {
-              dispatch(addItem(item, type));
-            });
-          }
-        });
-
-        const assetId = json.assets[0].id;
-
-        /* Sort comments by date*/
-        json.comments.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
-        const rels = json.comments.reduce((h, item) => {
-
-          /* Check for root and child comments. */
-          if (
-            item.asset_id === assetId &&
-            !item.parent_id) {
-            h.rootComments.push(item.id);
-          } else if (
-            item.asset_id === assetId
-          ) {
-            let children = h.childComments[item.parent_id] || [];
-            h.childComments[item.parent_id] = children.concat(item.id);
-          }
-          return h;
-        }, {rootComments: [], childComments: {}});
-
-        dispatch(updateItem(assetId, 'comments', rels.rootComments, 'assets'));
-
-        Object.keys(rels.childComments).forEach(key => {
-          dispatch(updateItem(key, 'children', rels.childComments[key].reverse(), 'comments'));
-        });
-
-        /* Hydrate actions on comments */
-        json.actions.forEach(action => {
-          dispatch(updateItem(action.item_id, action.action_type, action.id, 'comments'));
-        });
-
-        return (json);
-      });
+			return getStreamHelper(dispatch, json);
+		});
   };
 }
 
+export function getStreamFromPFS (commitID) {
+  console.log("in getStreamFromPFS()");
+
+  // Here I think I want to remove all the existing comments?
+
+  return (dispatch) => {
+	dummy_data = {"assets":[{"_id":"586ee6a032593a5a3ea45c5e","url":"http://localhost:3000/timemachine","created_at":"2017-01-06T00:36:48.468Z","updated_at":"2017-01-09T19:53:28.916Z","title":"Coral Talk","description":"A description of this article.","image":"https://coralproject.net/images/splash-md.jpg","author":"A. J. Ournalist","publication_date":"2016-11-16T16:46:06.000Z","modified_date":"2016-11-16T17:09:44.000Z","section":"The Section!","settings":{"moderation":"post"},"closedMessage":null,"closedAt":null,"scraped":"2017-01-06T00:36:50.162Z","type":"assets","id":"9ce1f45c-f943-4662-80d5-8968b46358fc"}],"comments":[{"updated_at":"2017-01-09T19:33:15.424Z","created_at":"2017-01-09T19:33:15.424Z","body":"sss1","asset_id":"9ce1f45c-f943-4662-80d5-8968b46358fc","author_id":"927d59de-07be-4946-ab66-04aecf5ff01f","__v":0,"status_history":[],"id":"50f08f5c-c710-4531-8685-9546ea9aa74a","status":null},{"updated_at":"2017-01-09T19:33:26.435Z","created_at":"2017-01-09T19:33:26.435Z","body":" ggggg","asset_id":"9ce1f45c-f943-4662-80d5-8968b46358fc","parent_id":"50f08f5c-c710-4531-8685-9546ea9aa74a","author_id":"927d59de-07be-4946-ab66-04aecf5ff01f","__v":0,"status_history":[],"id":"2c8d5d2a-ffdf-4608-8288-afed15b28e45","status":null},{"updated_at":"2017-01-09T19:33:30.845Z","created_at":"2017-01-09T19:33:30.845Z","body":"dfghdfgh","asset_id":"9ce1f45c-f943-4662-80d5-8968b46358fc","parent_id":"50f08f5c-c710-4531-8685-9546ea9aa74a","author_id":"927d59de-07be-4946-ab66-04aecf5ff01f","__v":0,"status_history":[],"id":"5f53bf6c-3487-4c6d-8d69-1adf60e05776","status":null}],"users":[{"updated_at":"2017-01-09T18:39:08.448Z","created_at":"2017-01-04T00:35:33.982Z","displayName":"sean","__v":0,"settings":{"bio":""},"status":"active","roles":["admin"],"profiles":[{"id":"sean@pachyderm.io","provider":"local"}],"id":"927d59de-07be-4946-ab66-04aecf5ff01f"}],"actions":[],"settings":{"updated_at":"2017-01-06T00:36:43.084Z","wordlist":{"suspect":[],"banned":[]},"created_at":"2017-01-04T00:34:09.279Z","__v":0,"_id":"586c430132593a5a3ea45c5c","charCountEnable":false,"charCount":5000,"closedMessage":"","closedTimeout":1209600,"infoBoxContent":"","infoBoxEnable":false,"moderation":"post","id":"1"}};
+	return getStreamHelper(dispatch, dummy_data);
+  };
+}
 /*
 * Get Items Array
 * Gets a set of items from an array of item ids

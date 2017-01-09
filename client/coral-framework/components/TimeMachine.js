@@ -1,7 +1,21 @@
-import React, {Component} from 'react';
+import React, {Component, PropTypes} from 'react';
+import {connect} from 'react-redux';
+//import getStreamFromPFS from '../../coral-framework';
 
-export default class TimeMachine extends Component {
+import {
+  itemActions,
+  Notification,
+  notificationActions,
+  authActions
+} from '../../coral-framework';
+const {addItem, updateItem, postItem, getStream, getStreamFromPFS, postAction, deleteAction, appendItemArray} = itemActions;
 
+export class TimeMachine extends Component {
+
+  static propTypes = {
+    items: PropTypes.object.isRequired,
+    refreshComments: PropTypes.func.isRequired,
+  }
   constructor (props) {
     super(props);
     console.log('In time machine constructor');
@@ -18,9 +32,12 @@ export default class TimeMachine extends Component {
   loadTimestamp = (e) => {
     console.log('Going to update the comments');
     console.log('Got value:', e);
+	// I want to fire an action here, e.g.
+	getStreamFromPFS("foo");
   }
 
   render () {
+    console.log("in TM render()");
     return (
       <div className="tardis">
         <label htmlFor='timeline'> Timeline </label>
@@ -30,3 +47,12 @@ export default class TimeMachine extends Component {
   }
 }
 
+const mapStateToProps = state => ({
+  items: state.items.toJS(),
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  refreshComments: (commitId) => dispatch(getStreamFromPFS(commitId)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(TimeMachine);

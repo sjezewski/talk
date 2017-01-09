@@ -70,6 +70,7 @@ class CommentStream extends Component {
       path = window.location.href.split('#')[0];
     }
 
+	console.log("Getting stream at:", path || window.location);
     this.props.getStream(path || window.location);
     this.path = path;
 
@@ -97,11 +98,12 @@ class CommentStream extends Component {
     const rootItemId = this.props.items.assets && Object.keys(this.props.items.assets)[0];
     const rootItem = this.props.items.assets && this.props.items.assets[rootItemId];
     const {actions, users, comments} = this.props.items;
+	console.log("Got ", comments.length, " comments");
     const {status, moderation, closedMessage, charCount, charCountEnable} = this.props.config;
     const {loggedIn, isAdmin, user, showSignInDialog, signInOffset} = this.props.auth;
     const {activeTab} = this.state;
     const banned = (this.props.userData.status === 'banned');
-
+	console.log("IM IN RENDER OMG");
     const expandForLogin = showSignInDialog ? {
       minHeight: document.body.scrollHeight + 150
     } : {};
