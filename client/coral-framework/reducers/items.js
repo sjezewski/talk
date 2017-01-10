@@ -7,7 +7,9 @@ const initialState = fromJS({
   comments: {},
   users: {},
   assets: {},
-  actions: {}
+  actions: {},
+  commits: [],
+  commitIndex: 0,
 });
 
 export default (state = initialState, action) => {
@@ -24,10 +26,15 @@ export default (state = initialState, action) => {
         return prop ? prop.push(fromJS(action.value)) : fromJS([action.value]);
       }
     });
-  case actions.REFRESH_ITEMS:
-	console.log("Reducing REFRESH_ITEMS action");
-	return state;
+  case actions.LOAD_COMMITS:
+	console.log("Reducing LOAD_COMMITS action, setting:", action.commits);
+	return state.set("commits", action.commits);
+  case actions.UPDATE_COMMIT_INDEX:
+    console.log("Reducing UPDATE_COMMIT_INDEX to :", action.index);
+	console.log("current state:", state);
+	return state.set("commitIndex", action.index);
   default:
     return state;
   }
+
 };

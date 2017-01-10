@@ -9,13 +9,20 @@ import {UPDATE_CONFIG} from '../constants/config';
 export const ADD_ITEM = 'ADD_ITEM';
 export const UPDATE_ITEM = 'UPDATE_ITEM';
 export const APPEND_ITEM_ARRAY = 'APPEND_ITEM_ARRAY';
-export const REFRESH_ITEMS = 'REFRESH_ITEMS';
+export const LOAD_COMMITS = 'LOAD_COMMITS';
+export const UPDATE_COMMIT_INDEX = 'UPDATE_COMMIT_INDEX';
 
-export const refreshItems = (items, item_type) => {
+export const loadCommitsAction = (commits) => {
 	return {
-		type: REFRESH_ITEMS,
-		items,
-		item_type
+		type: LOAD_COMMITS,
+		commits,
+	}
+}
+
+export const updateCommitIndex = (index) => {
+	return {
+		type: UPDATE_COMMIT_INDEX,
+		index,
 	}
 }
 
@@ -174,6 +181,32 @@ export function getStreamFromPFS (commitID) {
 	return getStreamHelper(dispatch, dummy_data);
   };
 }
+
+function PFSListCommit() {
+	return [
+		{
+			"id": "59827345tsdkjfghow3ty8",
+			"started": "45 seconds ago",
+		},
+		{
+			"id": "dklasfjgsldkjfhg98345j",
+			"started": "25 seconds ago",
+		},
+		{
+			"id": "skjdfnglkjndf9dfuglkjh",
+			"started": "15 seconds ago",
+		},
+	]
+}
+
+export function loadCommits() {
+  return (dispatch) => {
+	let commits = PFSListCommit();
+	dispatch(loadCommitsAction(commits));
+	return commits
+  };
+}
+
 /*
 * Get Items Array
 * Gets a set of items from an array of item ids
