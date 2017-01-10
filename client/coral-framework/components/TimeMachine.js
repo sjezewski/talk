@@ -39,10 +39,13 @@ export class TimeMachine extends Component {
 	this.props.updateCommitIndex(value);
 	console.log("Updated commit index");
 	this.props.refreshComments(this.props.items.commits[value]);
+	return false;
   }
 
   render () {
     console.log("in TM render()");
+	const commitIndex = this.props.items.commitIndex;
+	const currentCommit = this.props.items.commits[commitIndex];
     return (
       <div className="tardis">
 	    <div className="control">
@@ -51,15 +54,15 @@ export class TimeMachine extends Component {
 			id='timemachineSlider'
 			type='range'
 			name='timeline'
-			value='{this.state.commitIndex}'
+			value={commitIndex}
 			min='0'
 			max={this.props.items.commits.length - 1}
-			onChange={(e) => this.loadTimestamp(e)}/>
+			onChange={this.loadTimestamp}/>
 	    </div>
 		<div className="metadata">
 			<div className="stateInfo">
-			  <span> Time: {} </span>
-			  <span> Commit ID: {} </span>
+			  <span> Time: {currentCommit ? currentCommit["started"] : '?'} </span>
+			  <span> Commit ID: {currentCommit ? currentCommit["id"] : '?'} </span>
 			</div>
 		</div>
       </div>
