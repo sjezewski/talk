@@ -175,6 +175,16 @@ export function getStreamFromPFS (commitID) {
   console.log("in getStreamFromPFS()");
 
   // Here I think I want to remove all the existing comments?
+  let GBC = require("grpc-bus-websocket-client");
+  let request = {pachyderm: {pfs: {API: 'localhost:50051'}}}
+  new GBC("ws://localhost:8080/", 'pachyderm.proto', request)
+   .connect()
+     .then(function(gbc) {
+       gbc.services.pfs.API.listRepo({name: 'Gabriel'}, function(err, res){
+           console.log("GOT PFS RESULT!!!:");
+         console.log(res);
+       });  // --> Hello Gabriel
+     });
 
   return (dispatch) => {
 	let dummy_data = {"assets":[{"_id":"586ee6a032593a5a3ea45c5e","url":"http://localhost:3000/timemachine","created_at":"2017-01-06T00:36:48.468Z","updated_at":"2017-01-09T19:53:28.916Z","title":"Coral Talk","description":"A description of this article.","image":"https://coralproject.net/images/splash-md.jpg","author":"A. J. Ournalist","publication_date":"2016-11-16T16:46:06.000Z","modified_date":"2016-11-16T17:09:44.000Z","section":"The Section!","settings":{"moderation":"post"},"closedMessage":null,"closedAt":null,"scraped":"2017-01-06T00:36:50.162Z","type":"assets","id":"9ce1f45c-f943-4662-80d5-8968b46358fc"}],"comments":[{"updated_at":"2017-01-09T19:33:15.424Z","created_at":"2017-01-09T19:33:15.424Z","body":"sss1","asset_id":"9ce1f45c-f943-4662-80d5-8968b46358fc","author_id":"927d59de-07be-4946-ab66-04aecf5ff01f","__v":0,"status_history":[],"id":"50f08f5c-c710-4531-8685-9546ea9aa74a","status":null},{"updated_at":"2017-01-09T19:33:26.435Z","created_at":"2017-01-09T19:33:26.435Z","body":" ggggg","asset_id":"9ce1f45c-f943-4662-80d5-8968b46358fc","parent_id":"50f08f5c-c710-4531-8685-9546ea9aa74a","author_id":"927d59de-07be-4946-ab66-04aecf5ff01f","__v":0,"status_history":[],"id":"2c8d5d2a-ffdf-4608-8288-afed15b28e45","status":null},{"updated_at":"2017-01-09T19:33:30.845Z","created_at":"2017-01-09T19:33:30.845Z","body":"dfghdfgh","asset_id":"9ce1f45c-f943-4662-80d5-8968b46358fc","parent_id":"50f08f5c-c710-4531-8685-9546ea9aa74a","author_id":"927d59de-07be-4946-ab66-04aecf5ff01f","__v":0,"status_history":[],"id":"5f53bf6c-3487-4c6d-8d69-1adf60e05776","status":null}],"users":[{"updated_at":"2017-01-09T18:39:08.448Z","created_at":"2017-01-04T00:35:33.982Z","displayName":"sean","__v":0,"settings":{"bio":""},"status":"active","roles":["admin"],"profiles":[{"id":"sean@pachyderm.io","provider":"local"}],"id":"927d59de-07be-4946-ab66-04aecf5ff01f"}],"actions":[],"settings":{"updated_at":"2017-01-06T00:36:43.084Z","wordlist":{"suspect":[],"banned":[]},"created_at":"2017-01-04T00:34:09.279Z","__v":0,"_id":"586c430132593a5a3ea45c5c","charCountEnable":false,"charCount":5000,"closedMessage":"","closedTimeout":1209600,"infoBoxContent":"","infoBoxEnable":false,"moderation":"post","id":"1"}};
