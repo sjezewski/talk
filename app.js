@@ -31,7 +31,7 @@ app.use(bodyParser.json());
 app.use('/client', express.static(path.join(__dirname, 'dist')));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
-app.use(express.static('public'))
+app.use(express.static('public'));
 
 //==============================================================================
 // SESSION MIDDLEWARE

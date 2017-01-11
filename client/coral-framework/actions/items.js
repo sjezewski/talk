@@ -173,14 +173,18 @@ export function getStream (assetUrl) {
 
 export function getStreamFromPFS (commitID) {
   console.log("in getStreamFromPFS()");
-
+  console.log("rully?");
   // Here I think I want to remove all the existing comments?
   let GBC = require("grpc-bus-websocket-client");
-  let request = {pachyderm: {pfs: {API: 'localhost:50051'}}}
-  new GBC("ws://localhost:8080/", 'pachyderm.proto', request)
+  console.log("yah");
+  //let request = {pachyderm: {pfs: {API: 'localhost:50051'}}}
+  let request = {pfs: {API: 'localhost:30650'}};
+  console.log("GOING TO CONNECT TO WS OMG");
+  new GBC("ws://localhost:8081/", 'pfs.proto.json', request)
    .connect()
      .then(function(gbc) {
-       gbc.services.pfs.API.listRepo({name: 'Gabriel'}, function(err, res){
+       console.log("connected to WS, now going to request something");
+       gbc.services.pfs.API.listRepo({}, function(err, res){
            console.log("GOT PFS RESULT!!!:");
          console.log(res);
        });  // --> Hello Gabriel

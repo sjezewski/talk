@@ -1,0 +1,1690 @@
+{
+    "package": null,
+    "messages": [
+        {
+            "name": "google",
+            "fields": [],
+            "messages": [
+                {
+                    "name": "api",
+                    "fields": [],
+                    "options": {
+                        "cc_enable_arenas": true,
+                        "go_package": "google.golang.org/genproto/googleapis/api/annotations;annotations",
+                        "java_multiple_files": true,
+                        "java_outer_classname": "AnnotationsProto",
+                        "java_package": "com.google.api",
+                        "objc_class_prefix": "GAPI"
+                    },
+                    "messages": [
+                        {
+                            "name": "Http",
+                            "fields": [
+                                {
+                                    "rule": "repeated",
+                                    "type": "HttpRule",
+                                    "name": "rules",
+                                    "id": 1
+                                }
+                            ]
+                        },
+                        {
+                            "name": "HttpRule",
+                            "fields": [
+                                {
+                                    "rule": "optional",
+                                    "type": "string",
+                                    "name": "selector",
+                                    "id": 1
+                                },
+                                {
+                                    "rule": "optional",
+                                    "type": "string",
+                                    "name": "get",
+                                    "id": 2,
+                                    "oneof": "pattern"
+                                },
+                                {
+                                    "rule": "optional",
+                                    "type": "string",
+                                    "name": "put",
+                                    "id": 3,
+                                    "oneof": "pattern"
+                                },
+                                {
+                                    "rule": "optional",
+                                    "type": "string",
+                                    "name": "post",
+                                    "id": 4,
+                                    "oneof": "pattern"
+                                },
+                                {
+                                    "rule": "optional",
+                                    "type": "string",
+                                    "name": "delete",
+                                    "id": 5,
+                                    "oneof": "pattern"
+                                },
+                                {
+                                    "rule": "optional",
+                                    "type": "string",
+                                    "name": "patch",
+                                    "id": 6,
+                                    "oneof": "pattern"
+                                },
+                                {
+                                    "rule": "optional",
+                                    "type": "CustomHttpPattern",
+                                    "name": "custom",
+                                    "id": 8,
+                                    "oneof": "pattern"
+                                },
+                                {
+                                    "rule": "optional",
+                                    "type": "string",
+                                    "name": "body",
+                                    "id": 7
+                                },
+                                {
+                                    "rule": "repeated",
+                                    "type": "HttpRule",
+                                    "name": "additional_bindings",
+                                    "id": 11
+                                }
+                            ],
+                            "oneofs": {
+                                "pattern": [
+                                    2,
+                                    3,
+                                    4,
+                                    5,
+                                    6,
+                                    8
+                                ]
+                            }
+                        },
+                        {
+                            "name": "CustomHttpPattern",
+                            "fields": [
+                                {
+                                    "rule": "optional",
+                                    "type": "string",
+                                    "name": "kind",
+                                    "id": 1
+                                },
+                                {
+                                    "rule": "optional",
+                                    "type": "string",
+                                    "name": "path",
+                                    "id": 2
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "protobuf",
+                    "fields": [],
+                    "options": {
+                        "csharp_namespace": "Google.Protobuf.WellKnownTypes",
+                        "go_package": "github.com/golang/protobuf/ptypes/wrappers",
+                        "java_package": "com.google.protobuf",
+                        "java_outer_classname": "WrappersProto",
+                        "java_multiple_files": true,
+                        "objc_class_prefix": "GPB",
+                        "cc_enable_arenas": true
+                    },
+                    "messages": [
+                        {
+                            "name": "Empty",
+                            "fields": []
+                        },
+                        {
+                            "name": "Timestamp",
+                            "fields": [
+                                {
+                                    "rule": "optional",
+                                    "type": "int64",
+                                    "name": "seconds",
+                                    "id": 1
+                                },
+                                {
+                                    "rule": "optional",
+                                    "type": "int32",
+                                    "name": "nanos",
+                                    "id": 2
+                                }
+                            ]
+                        },
+                        {
+                            "name": "DoubleValue",
+                            "fields": [
+                                {
+                                    "rule": "optional",
+                                    "type": "double",
+                                    "name": "value",
+                                    "id": 1
+                                }
+                            ]
+                        },
+                        {
+                            "name": "FloatValue",
+                            "fields": [
+                                {
+                                    "rule": "optional",
+                                    "type": "float",
+                                    "name": "value",
+                                    "id": 1
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Int64Value",
+                            "fields": [
+                                {
+                                    "rule": "optional",
+                                    "type": "int64",
+                                    "name": "value",
+                                    "id": 1
+                                }
+                            ]
+                        },
+                        {
+                            "name": "UInt64Value",
+                            "fields": [
+                                {
+                                    "rule": "optional",
+                                    "type": "uint64",
+                                    "name": "value",
+                                    "id": 1
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Int32Value",
+                            "fields": [
+                                {
+                                    "rule": "optional",
+                                    "type": "int32",
+                                    "name": "value",
+                                    "id": 1
+                                }
+                            ]
+                        },
+                        {
+                            "name": "UInt32Value",
+                            "fields": [
+                                {
+                                    "rule": "optional",
+                                    "type": "uint32",
+                                    "name": "value",
+                                    "id": 1
+                                }
+                            ]
+                        },
+                        {
+                            "name": "BoolValue",
+                            "fields": [
+                                {
+                                    "rule": "optional",
+                                    "type": "bool",
+                                    "name": "value",
+                                    "id": 1
+                                }
+                            ]
+                        },
+                        {
+                            "name": "StringValue",
+                            "fields": [
+                                {
+                                    "rule": "optional",
+                                    "type": "string",
+                                    "name": "value",
+                                    "id": 1
+                                }
+                            ]
+                        },
+                        {
+                            "name": "BytesValue",
+                            "fields": [
+                                {
+                                    "rule": "optional",
+                                    "type": "bytes",
+                                    "name": "value",
+                                    "id": 1
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "shard",
+            "fields": [],
+            "messages": [
+                {
+                    "name": "ServerState",
+                    "fields": [
+                        {
+                            "rule": "optional",
+                            "type": "string",
+                            "name": "address",
+                            "id": 1
+                        },
+                        {
+                            "rule": "optional",
+                            "type": "int64",
+                            "name": "version",
+                            "id": 2
+                        }
+                    ]
+                },
+                {
+                    "name": "FrontendState",
+                    "fields": [
+                        {
+                            "rule": "optional",
+                            "type": "string",
+                            "name": "address",
+                            "id": 1
+                        },
+                        {
+                            "rule": "optional",
+                            "type": "int64",
+                            "name": "version",
+                            "id": 2
+                        }
+                    ]
+                },
+                {
+                    "name": "ServerRole",
+                    "fields": [
+                        {
+                            "rule": "optional",
+                            "type": "string",
+                            "name": "address",
+                            "id": 1
+                        },
+                        {
+                            "rule": "optional",
+                            "type": "int64",
+                            "name": "version",
+                            "id": 2
+                        },
+                        {
+                            "rule": "map",
+                            "type": "bool",
+                            "keytype": "uint64",
+                            "name": "shards",
+                            "id": 3
+                        }
+                    ]
+                },
+                {
+                    "name": "Addresses",
+                    "fields": [
+                        {
+                            "rule": "optional",
+                            "type": "int64",
+                            "name": "version",
+                            "id": 1
+                        },
+                        {
+                            "rule": "map",
+                            "type": "string",
+                            "keytype": "uint64",
+                            "name": "addresses",
+                            "id": 2
+                        }
+                    ]
+                },
+                {
+                    "name": "StartRegister",
+                    "fields": [
+                        {
+                            "rule": "optional",
+                            "type": "string",
+                            "name": "address",
+                            "id": 1
+                        }
+                    ]
+                },
+                {
+                    "name": "FinishRegister",
+                    "fields": [
+                        {
+                            "rule": "optional",
+                            "type": "string",
+                            "name": "address",
+                            "id": 1
+                        },
+                        {
+                            "rule": "optional",
+                            "type": "string",
+                            "name": "error",
+                            "id": 2
+                        }
+                    ]
+                },
+                {
+                    "name": "Version",
+                    "fields": [
+                        {
+                            "rule": "optional",
+                            "type": "int64",
+                            "name": "result",
+                            "id": 1
+                        },
+                        {
+                            "rule": "optional",
+                            "type": "string",
+                            "name": "error",
+                            "id": 2
+                        }
+                    ]
+                },
+                {
+                    "name": "StartAssignRoles",
+                    "fields": []
+                },
+                {
+                    "name": "FinishAssignRoles",
+                    "fields": [
+                        {
+                            "rule": "optional",
+                            "type": "string",
+                            "name": "error",
+                            "id": 1
+                        }
+                    ]
+                },
+                {
+                    "name": "FailedToAssignRoles",
+                    "fields": [
+                        {
+                            "rule": "map",
+                            "type": "ServerState",
+                            "keytype": "string",
+                            "name": "server_states",
+                            "id": 1
+                        },
+                        {
+                            "rule": "optional",
+                            "type": "uint64",
+                            "name": "num_shards",
+                            "id": 2
+                        },
+                        {
+                            "rule": "optional",
+                            "type": "uint64",
+                            "name": "num_replicas",
+                            "id": 3
+                        }
+                    ]
+                },
+                {
+                    "name": "SetServerState",
+                    "fields": [
+                        {
+                            "rule": "optional",
+                            "type": "ServerState",
+                            "name": "serverState",
+                            "id": 1
+                        }
+                    ]
+                },
+                {
+                    "name": "SetFrontendState",
+                    "fields": [
+                        {
+                            "rule": "optional",
+                            "type": "FrontendState",
+                            "name": "frontendState",
+                            "id": 1
+                        }
+                    ]
+                },
+                {
+                    "name": "AddServerRole",
+                    "fields": [
+                        {
+                            "rule": "optional",
+                            "type": "ServerRole",
+                            "name": "serverRole",
+                            "id": 1
+                        },
+                        {
+                            "rule": "optional",
+                            "type": "string",
+                            "name": "error",
+                            "id": 2
+                        }
+                    ]
+                },
+                {
+                    "name": "RemoveServerRole",
+                    "fields": [
+                        {
+                            "rule": "optional",
+                            "type": "ServerRole",
+                            "name": "serverRole",
+                            "id": 1
+                        },
+                        {
+                            "rule": "optional",
+                            "type": "string",
+                            "name": "error",
+                            "id": 2
+                        }
+                    ]
+                },
+                {
+                    "name": "SetServerRole",
+                    "fields": [
+                        {
+                            "rule": "optional",
+                            "type": "ServerRole",
+                            "name": "serverRole",
+                            "id": 2
+                        }
+                    ]
+                },
+                {
+                    "name": "DeleteServerRole",
+                    "fields": [
+                        {
+                            "rule": "optional",
+                            "type": "ServerRole",
+                            "name": "serverRole",
+                            "id": 2
+                        }
+                    ]
+                },
+                {
+                    "name": "SetAddresses",
+                    "fields": [
+                        {
+                            "rule": "optional",
+                            "type": "Addresses",
+                            "name": "addresses",
+                            "id": 1
+                        }
+                    ]
+                },
+                {
+                    "name": "GetAddress",
+                    "fields": [
+                        {
+                            "rule": "optional",
+                            "type": "uint64",
+                            "name": "shard",
+                            "id": 1
+                        },
+                        {
+                            "rule": "optional",
+                            "type": "int64",
+                            "name": "version",
+                            "id": 2
+                        },
+                        {
+                            "rule": "optional",
+                            "type": "string",
+                            "name": "result",
+                            "id": 3
+                        },
+                        {
+                            "rule": "optional",
+                            "type": "bool",
+                            "name": "ok",
+                            "id": 4
+                        },
+                        {
+                            "rule": "optional",
+                            "type": "string",
+                            "name": "error",
+                            "id": 5
+                        }
+                    ]
+                },
+                {
+                    "name": "GetShardToAddress",
+                    "fields": [
+                        {
+                            "rule": "optional",
+                            "type": "int64",
+                            "name": "version",
+                            "id": 1
+                        },
+                        {
+                            "rule": "map",
+                            "type": "string",
+                            "keytype": "uint64",
+                            "name": "result",
+                            "id": 2
+                        },
+                        {
+                            "rule": "optional",
+                            "type": "string",
+                            "name": "error",
+                            "id": 3
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "pfs",
+            "fields": [],
+            "messages": [
+                {
+                    "name": "Repo",
+                    "fields": [
+                        {
+                            "rule": "optional",
+                            "type": "string",
+                            "name": "name",
+                            "id": 1
+                        }
+                    ]
+                },
+                {
+                    "name": "Commit",
+                    "fields": [
+                        {
+                            "rule": "optional",
+                            "type": "Repo",
+                            "name": "repo",
+                            "id": 1
+                        },
+                        {
+                            "rule": "optional",
+                            "type": "string",
+                            "name": "id",
+                            "id": 2
+                        }
+                    ]
+                },
+                {
+                    "name": "Commits",
+                    "fields": [
+                        {
+                            "rule": "repeated",
+                            "type": "Commit",
+                            "name": "commit",
+                            "id": 1
+                        }
+                    ]
+                },
+                {
+                    "name": "Branches",
+                    "fields": [
+                        {
+                            "rule": "repeated",
+                            "type": "string",
+                            "name": "branches",
+                            "id": 1
+                        }
+                    ]
+                },
+                {
+                    "name": "File",
+                    "fields": [
+                        {
+                            "rule": "optional",
+                            "type": "Commit",
+                            "name": "commit",
+                            "id": 1
+                        },
+                        {
+                            "rule": "optional",
+                            "type": "string",
+                            "name": "path",
+                            "id": 2
+                        }
+                    ]
+                },
+                {
+                    "name": "Block",
+                    "fields": [
+                        {
+                            "rule": "optional",
+                            "type": "string",
+                            "name": "hash",
+                            "id": 1
+                        }
+                    ]
+                },
+                {
+                    "name": "RepoInfo",
+                    "fields": [
+                        {
+                            "rule": "optional",
+                            "type": "Repo",
+                            "name": "repo",
+                            "id": 1
+                        },
+                        {
+                            "rule": "optional",
+                            "type": "google.protobuf.Timestamp",
+                            "name": "created",
+                            "id": 2
+                        },
+                        {
+                            "rule": "optional",
+                            "type": "uint64",
+                            "name": "size_bytes",
+                            "id": 3
+                        },
+                        {
+                            "rule": "repeated",
+                            "type": "Repo",
+                            "name": "provenance",
+                            "id": 4
+                        }
+                    ]
+                },
+                {
+                    "name": "RepoInfos",
+                    "fields": [
+                        {
+                            "rule": "repeated",
+                            "type": "RepoInfo",
+                            "name": "repo_info",
+                            "id": 1
+                        }
+                    ]
+                },
+                {
+                    "name": "CommitInfo",
+                    "fields": [
+                        {
+                            "rule": "optional",
+                            "type": "Commit",
+                            "name": "commit",
+                            "id": 1
+                        },
+                        {
+                            "rule": "optional",
+                            "type": "string",
+                            "name": "branch",
+                            "id": 2
+                        },
+                        {
+                            "rule": "optional",
+                            "type": "CommitType",
+                            "name": "commit_type",
+                            "id": 3
+                        },
+                        {
+                            "rule": "optional",
+                            "type": "Commit",
+                            "name": "parent_commit",
+                            "id": 4
+                        },
+                        {
+                            "rule": "optional",
+                            "type": "google.protobuf.Timestamp",
+                            "name": "started",
+                            "id": 5
+                        },
+                        {
+                            "rule": "optional",
+                            "type": "google.protobuf.Timestamp",
+                            "name": "finished",
+                            "id": 6
+                        },
+                        {
+                            "rule": "optional",
+                            "type": "uint64",
+                            "name": "size_bytes",
+                            "id": 7
+                        },
+                        {
+                            "rule": "optional",
+                            "type": "bool",
+                            "name": "cancelled",
+                            "id": 8
+                        },
+                        {
+                            "rule": "optional",
+                            "type": "bool",
+                            "name": "archived",
+                            "id": 9
+                        },
+                        {
+                            "rule": "repeated",
+                            "type": "Commit",
+                            "name": "provenance",
+                            "id": 10
+                        }
+                    ]
+                },
+                {
+                    "name": "CommitInfos",
+                    "fields": [
+                        {
+                            "rule": "repeated",
+                            "type": "CommitInfo",
+                            "name": "commit_info",
+                            "id": 1
+                        }
+                    ]
+                },
+                {
+                    "name": "FileInfo",
+                    "fields": [
+                        {
+                            "rule": "optional",
+                            "type": "File",
+                            "name": "file",
+                            "id": 1
+                        },
+                        {
+                            "rule": "optional",
+                            "type": "FileType",
+                            "name": "file_type",
+                            "id": 2
+                        },
+                        {
+                            "rule": "optional",
+                            "type": "uint64",
+                            "name": "size_bytes",
+                            "id": 3
+                        },
+                        {
+                            "rule": "optional",
+                            "type": "google.protobuf.Timestamp",
+                            "name": "modified",
+                            "id": 4
+                        },
+                        {
+                            "rule": "optional",
+                            "type": "Commit",
+                            "name": "commit_modified",
+                            "id": 5
+                        },
+                        {
+                            "rule": "repeated",
+                            "type": "File",
+                            "name": "children",
+                            "id": 6
+                        }
+                    ]
+                },
+                {
+                    "name": "FileInfos",
+                    "fields": [
+                        {
+                            "rule": "repeated",
+                            "type": "FileInfo",
+                            "name": "file_info",
+                            "id": 1
+                        }
+                    ]
+                },
+                {
+                    "name": "ByteRange",
+                    "fields": [
+                        {
+                            "rule": "optional",
+                            "type": "uint64",
+                            "name": "lower",
+                            "id": 1
+                        },
+                        {
+                            "rule": "optional",
+                            "type": "uint64",
+                            "name": "upper",
+                            "id": 2
+                        }
+                    ]
+                },
+                {
+                    "name": "BlockRef",
+                    "fields": [
+                        {
+                            "rule": "optional",
+                            "type": "Block",
+                            "name": "block",
+                            "id": 1
+                        },
+                        {
+                            "rule": "optional",
+                            "type": "ByteRange",
+                            "name": "range",
+                            "id": 2
+                        }
+                    ]
+                },
+                {
+                    "name": "BlockRefs",
+                    "fields": [
+                        {
+                            "rule": "repeated",
+                            "type": "BlockRef",
+                            "name": "block_ref",
+                            "id": 1
+                        }
+                    ]
+                },
+                {
+                    "name": "Append",
+                    "fields": [
+                        {
+                            "rule": "repeated",
+                            "type": "BlockRef",
+                            "name": "block_refs",
+                            "id": 1
+                        },
+                        {
+                            "rule": "map",
+                            "type": "bool",
+                            "keytype": "string",
+                            "name": "children",
+                            "id": 2
+                        },
+                        {
+                            "rule": "optional",
+                            "type": "Commit",
+                            "name": "last_ref",
+                            "id": 3
+                        },
+                        {
+                            "rule": "optional",
+                            "type": "bool",
+                            "name": "delete",
+                            "id": 4
+                        },
+                        {
+                            "rule": "optional",
+                            "type": "FileType",
+                            "name": "file_type",
+                            "id": 5
+                        }
+                    ]
+                },
+                {
+                    "name": "BlockInfo",
+                    "fields": [
+                        {
+                            "rule": "optional",
+                            "type": "Block",
+                            "name": "block",
+                            "id": 1
+                        },
+                        {
+                            "rule": "optional",
+                            "type": "google.protobuf.Timestamp",
+                            "name": "created",
+                            "id": 2
+                        },
+                        {
+                            "rule": "optional",
+                            "type": "uint64",
+                            "name": "size_bytes",
+                            "id": 3
+                        }
+                    ]
+                },
+                {
+                    "name": "BlockInfos",
+                    "fields": [
+                        {
+                            "rule": "repeated",
+                            "type": "BlockInfo",
+                            "name": "block_info",
+                            "id": 1
+                        }
+                    ]
+                },
+                {
+                    "name": "Shard",
+                    "fields": [
+                        {
+                            "rule": "optional",
+                            "type": "uint64",
+                            "name": "file_number",
+                            "id": 1
+                        },
+                        {
+                            "rule": "optional",
+                            "type": "uint64",
+                            "name": "file_modulus",
+                            "id": 2
+                        },
+                        {
+                            "rule": "optional",
+                            "type": "uint64",
+                            "name": "block_number",
+                            "id": 3
+                        },
+                        {
+                            "rule": "optional",
+                            "type": "uint64",
+                            "name": "block_modulus",
+                            "id": 4
+                        }
+                    ]
+                },
+                {
+                    "name": "CreateRepoRequest",
+                    "fields": [
+                        {
+                            "rule": "optional",
+                            "type": "Repo",
+                            "name": "repo",
+                            "id": 1
+                        },
+                        {
+                            "rule": "repeated",
+                            "type": "Repo",
+                            "name": "provenance",
+                            "id": 2
+                        }
+                    ]
+                },
+                {
+                    "name": "InspectRepoRequest",
+                    "fields": [
+                        {
+                            "rule": "optional",
+                            "type": "Repo",
+                            "name": "repo",
+                            "id": 1
+                        }
+                    ]
+                },
+                {
+                    "name": "ListRepoRequest",
+                    "fields": [
+                        {
+                            "rule": "repeated",
+                            "type": "Repo",
+                            "name": "provenance",
+                            "id": 1
+                        }
+                    ]
+                },
+                {
+                    "name": "DeleteRepoRequest",
+                    "fields": [
+                        {
+                            "rule": "optional",
+                            "type": "Repo",
+                            "name": "repo",
+                            "id": 1
+                        },
+                        {
+                            "rule": "optional",
+                            "type": "bool",
+                            "name": "force",
+                            "id": 2
+                        }
+                    ]
+                },
+                {
+                    "name": "StartCommitRequest",
+                    "fields": [
+                        {
+                            "rule": "optional",
+                            "type": "Commit",
+                            "name": "parent",
+                            "id": 1
+                        },
+                        {
+                            "rule": "repeated",
+                            "type": "Commit",
+                            "name": "provenance",
+                            "id": 2
+                        }
+                    ]
+                },
+                {
+                    "name": "ForkCommitRequest",
+                    "fields": [
+                        {
+                            "rule": "optional",
+                            "type": "Commit",
+                            "name": "parent",
+                            "id": 1
+                        },
+                        {
+                            "rule": "optional",
+                            "type": "string",
+                            "name": "branch",
+                            "id": 2
+                        },
+                        {
+                            "rule": "repeated",
+                            "type": "Commit",
+                            "name": "provenance",
+                            "id": 3
+                        }
+                    ]
+                },
+                {
+                    "name": "FinishCommitRequest",
+                    "fields": [
+                        {
+                            "rule": "optional",
+                            "type": "Commit",
+                            "name": "commit",
+                            "id": 1
+                        },
+                        {
+                            "rule": "optional",
+                            "type": "bool",
+                            "name": "cancel",
+                            "id": 2
+                        }
+                    ]
+                },
+                {
+                    "name": "ArchiveCommitRequest",
+                    "fields": [
+                        {
+                            "rule": "repeated",
+                            "type": "Commit",
+                            "name": "commits",
+                            "id": 1
+                        }
+                    ]
+                },
+                {
+                    "name": "InspectCommitRequest",
+                    "fields": [
+                        {
+                            "rule": "optional",
+                            "type": "Commit",
+                            "name": "commit",
+                            "id": 1
+                        }
+                    ]
+                },
+                {
+                    "name": "ListCommitRequest",
+                    "fields": [
+                        {
+                            "rule": "repeated",
+                            "type": "Commit",
+                            "name": "exclude",
+                            "id": 1
+                        },
+                        {
+                            "rule": "repeated",
+                            "type": "Commit",
+                            "name": "include",
+                            "id": 6
+                        },
+                        {
+                            "rule": "repeated",
+                            "type": "Commit",
+                            "name": "provenance",
+                            "id": 2
+                        },
+                        {
+                            "rule": "optional",
+                            "type": "CommitType",
+                            "name": "commit_type",
+                            "id": 3
+                        },
+                        {
+                            "rule": "optional",
+                            "type": "CommitStatus",
+                            "name": "status",
+                            "id": 4
+                        },
+                        {
+                            "rule": "optional",
+                            "type": "bool",
+                            "name": "block",
+                            "id": 5
+                        }
+                    ]
+                },
+                {
+                    "name": "ListBranchRequest",
+                    "fields": [
+                        {
+                            "rule": "optional",
+                            "type": "Repo",
+                            "name": "repo",
+                            "id": 1
+                        },
+                        {
+                            "rule": "optional",
+                            "type": "CommitStatus",
+                            "name": "status",
+                            "id": 2
+                        }
+                    ]
+                },
+                {
+                    "name": "DeleteCommitRequest",
+                    "fields": [
+                        {
+                            "rule": "optional",
+                            "type": "Commit",
+                            "name": "commit",
+                            "id": 1
+                        }
+                    ]
+                },
+                {
+                    "name": "FlushCommitRequest",
+                    "fields": [
+                        {
+                            "rule": "repeated",
+                            "type": "Commit",
+                            "name": "commit",
+                            "id": 1
+                        },
+                        {
+                            "rule": "repeated",
+                            "type": "Repo",
+                            "name": "to_repo",
+                            "id": 2
+                        }
+                    ]
+                },
+                {
+                    "name": "DiffMethod",
+                    "fields": [
+                        {
+                            "rule": "optional",
+                            "type": "Commit",
+                            "name": "from_commit",
+                            "id": 1
+                        },
+                        {
+                            "rule": "optional",
+                            "type": "bool",
+                            "name": "full_file",
+                            "id": 2
+                        }
+                    ]
+                },
+                {
+                    "name": "GetFileRequest",
+                    "fields": [
+                        {
+                            "rule": "optional",
+                            "type": "File",
+                            "name": "file",
+                            "id": 1
+                        },
+                        {
+                            "rule": "optional",
+                            "type": "int64",
+                            "name": "offset_bytes",
+                            "id": 2
+                        },
+                        {
+                            "rule": "optional",
+                            "type": "int64",
+                            "name": "size_bytes",
+                            "id": 3
+                        },
+                        {
+                            "rule": "optional",
+                            "type": "Shard",
+                            "name": "shard",
+                            "id": 4
+                        },
+                        {
+                            "rule": "optional",
+                            "type": "DiffMethod",
+                            "name": "diff_method",
+                            "id": 5
+                        }
+                    ]
+                },
+                {
+                    "name": "PutFileRequest",
+                    "fields": [
+                        {
+                            "rule": "optional",
+                            "type": "File",
+                            "name": "file",
+                            "id": 1
+                        },
+                        {
+                            "rule": "optional",
+                            "type": "FileType",
+                            "name": "file_type",
+                            "id": 2
+                        },
+                        {
+                            "rule": "optional",
+                            "type": "bytes",
+                            "name": "value",
+                            "id": 3
+                        },
+                        {
+                            "rule": "optional",
+                            "type": "Delimiter",
+                            "name": "delimiter",
+                            "id": 4
+                        },
+                        {
+                            "rule": "optional",
+                            "type": "string",
+                            "name": "url",
+                            "id": 5
+                        },
+                        {
+                            "rule": "optional",
+                            "type": "bool",
+                            "name": "recursive",
+                            "id": 6
+                        }
+                    ]
+                },
+                {
+                    "name": "InspectFileRequest",
+                    "fields": [
+                        {
+                            "rule": "optional",
+                            "type": "File",
+                            "name": "file",
+                            "id": 1
+                        },
+                        {
+                            "rule": "optional",
+                            "type": "Shard",
+                            "name": "shard",
+                            "id": 2
+                        },
+                        {
+                            "rule": "optional",
+                            "type": "DiffMethod",
+                            "name": "diff_method",
+                            "id": 3
+                        }
+                    ]
+                },
+                {
+                    "name": "ListFileRequest",
+                    "fields": [
+                        {
+                            "rule": "optional",
+                            "type": "File",
+                            "name": "file",
+                            "id": 1
+                        },
+                        {
+                            "rule": "optional",
+                            "type": "Shard",
+                            "name": "shard",
+                            "id": 2
+                        },
+                        {
+                            "rule": "optional",
+                            "type": "DiffMethod",
+                            "name": "diff_method",
+                            "id": 3
+                        },
+                        {
+                            "rule": "optional",
+                            "type": "ListFileMode",
+                            "name": "mode",
+                            "id": 4
+                        }
+                    ]
+                },
+                {
+                    "name": "DeleteFileRequest",
+                    "fields": [
+                        {
+                            "rule": "optional",
+                            "type": "File",
+                            "name": "file",
+                            "id": 1
+                        }
+                    ]
+                },
+                {
+                    "name": "SquashCommitRequest",
+                    "fields": [
+                        {
+                            "rule": "repeated",
+                            "type": "Commit",
+                            "name": "from_commits",
+                            "id": 1
+                        },
+                        {
+                            "rule": "optional",
+                            "type": "Commit",
+                            "name": "to_commit",
+                            "id": 2
+                        }
+                    ]
+                },
+                {
+                    "name": "ReplayCommitRequest",
+                    "fields": [
+                        {
+                            "rule": "repeated",
+                            "type": "Commit",
+                            "name": "from_commits",
+                            "id": 1
+                        },
+                        {
+                            "rule": "optional",
+                            "type": "string",
+                            "name": "to_branch",
+                            "id": 2
+                        }
+                    ]
+                },
+                {
+                    "name": "PutBlockRequest",
+                    "fields": [
+                        {
+                            "rule": "optional",
+                            "type": "bytes",
+                            "name": "value",
+                            "id": 1
+                        },
+                        {
+                            "rule": "optional",
+                            "type": "Delimiter",
+                            "name": "delimiter",
+                            "id": 2
+                        }
+                    ]
+                },
+                {
+                    "name": "GetBlockRequest",
+                    "fields": [
+                        {
+                            "rule": "optional",
+                            "type": "Block",
+                            "name": "block",
+                            "id": 1
+                        },
+                        {
+                            "rule": "optional",
+                            "type": "uint64",
+                            "name": "offset_bytes",
+                            "id": 2
+                        },
+                        {
+                            "rule": "optional",
+                            "type": "uint64",
+                            "name": "size_bytes",
+                            "id": 3
+                        }
+                    ]
+                },
+                {
+                    "name": "DeleteBlockRequest",
+                    "fields": [
+                        {
+                            "rule": "optional",
+                            "type": "Block",
+                            "name": "block",
+                            "id": 1
+                        }
+                    ]
+                },
+                {
+                    "name": "InspectBlockRequest",
+                    "fields": [
+                        {
+                            "rule": "optional",
+                            "type": "Block",
+                            "name": "block",
+                            "id": 1
+                        }
+                    ]
+                },
+                {
+                    "name": "ListBlockRequest",
+                    "fields": []
+                }
+            ],
+            "enums": [
+                {
+                    "name": "CommitType",
+                    "values": [
+                        {
+                            "name": "COMMIT_TYPE_NONE",
+                            "id": 0
+                        },
+                        {
+                            "name": "COMMIT_TYPE_READ",
+                            "id": 1
+                        },
+                        {
+                            "name": "COMMIT_TYPE_WRITE",
+                            "id": 2
+                        }
+                    ]
+                },
+                {
+                    "name": "FileType",
+                    "values": [
+                        {
+                            "name": "FILE_TYPE_NONE",
+                            "id": 0
+                        },
+                        {
+                            "name": "FILE_TYPE_REGULAR",
+                            "id": 1
+                        },
+                        {
+                            "name": "FILE_TYPE_DIR",
+                            "id": 2
+                        }
+                    ]
+                },
+                {
+                    "name": "CommitStatus",
+                    "values": [
+                        {
+                            "name": "NORMAL",
+                            "id": 0
+                        },
+                        {
+                            "name": "ARCHIVED",
+                            "id": 1
+                        },
+                        {
+                            "name": "CANCELLED",
+                            "id": 2
+                        },
+                        {
+                            "name": "ALL",
+                            "id": 3
+                        }
+                    ]
+                },
+                {
+                    "name": "Delimiter",
+                    "values": [
+                        {
+                            "name": "NONE",
+                            "id": 0
+                        },
+                        {
+                            "name": "JSON",
+                            "id": 1
+                        },
+                        {
+                            "name": "LINE",
+                            "id": 2
+                        }
+                    ]
+                },
+                {
+                    "name": "ListFileMode",
+                    "values": [
+                        {
+                            "name": "ListFile_NORMAL",
+                            "id": 0
+                        },
+                        {
+                            "name": "ListFile_FAST",
+                            "id": 1
+                        },
+                        {
+                            "name": "ListFile_RECURSE",
+                            "id": 2
+                        }
+                    ]
+                }
+            ],
+            "services": [
+                {
+                    "name": "API",
+                    "options": {},
+                    "rpc": {
+                        "CreateRepo": {
+                            "request": "CreateRepoRequest",
+                            "response": "google.protobuf.Empty",
+                            "options": {}
+                        },
+                        "InspectRepo": {
+                            "request": "InspectRepoRequest",
+                            "response": "RepoInfo",
+                            "options": {}
+                        },
+                        "ListRepo": {
+                            "request": "ListRepoRequest",
+                            "response": "RepoInfos",
+                            "options": {}
+                        },
+                        "DeleteRepo": {
+                            "request": "DeleteRepoRequest",
+                            "response": "google.protobuf.Empty",
+                            "options": {}
+                        },
+                        "StartCommit": {
+                            "request": "StartCommitRequest",
+                            "response": "Commit",
+                            "options": {}
+                        },
+                        "ForkCommit": {
+                            "request": "ForkCommitRequest",
+                            "response": "Commit",
+                            "options": {}
+                        },
+                        "FinishCommit": {
+                            "request": "FinishCommitRequest",
+                            "response": "google.protobuf.Empty",
+                            "options": {}
+                        },
+                        "ArchiveCommit": {
+                            "request": "ArchiveCommitRequest",
+                            "response": "google.protobuf.Empty",
+                            "options": {}
+                        },
+                        "InspectCommit": {
+                            "request": "InspectCommitRequest",
+                            "response": "CommitInfo",
+                            "options": {}
+                        },
+                        "ListCommit": {
+                            "request": "ListCommitRequest",
+                            "response": "CommitInfos",
+                            "options": {}
+                        },
+                        "DeleteCommit": {
+                            "request": "DeleteCommitRequest",
+                            "response": "google.protobuf.Empty",
+                            "options": {}
+                        },
+                        "FlushCommit": {
+                            "request": "FlushCommitRequest",
+                            "response": "CommitInfos",
+                            "options": {}
+                        },
+                        "ListBranch": {
+                            "request": "ListBranchRequest",
+                            "response": "Branches",
+                            "options": {}
+                        },
+                        "SquashCommit": {
+                            "request": "SquashCommitRequest",
+                            "response": "google.protobuf.Empty",
+                            "options": {}
+                        },
+                        "ReplayCommit": {
+                            "request": "ReplayCommitRequest",
+                            "response": "Commits",
+                            "options": {}
+                        },
+                        "PutFile": {
+                            "request": "PutFileRequest",
+                            "response": "google.protobuf.Empty",
+                            "options": {}
+                        },
+                        "GetFile": {
+                            "request": "GetFileRequest",
+                            "response": "google.protobuf.BytesValue",
+                            "options": {}
+                        },
+                        "InspectFile": {
+                            "request": "InspectFileRequest",
+                            "response": "FileInfo",
+                            "options": {}
+                        },
+                        "ListFile": {
+                            "request": "ListFileRequest",
+                            "response": "FileInfos",
+                            "options": {}
+                        },
+                        "DeleteFile": {
+                            "request": "DeleteFileRequest",
+                            "response": "google.protobuf.Empty",
+                            "options": {}
+                        },
+                        "DeleteAll": {
+                            "request": "google.protobuf.Empty",
+                            "response": "google.protobuf.Empty",
+                            "options": {}
+                        },
+                        "ArchiveAll": {
+                            "request": "google.protobuf.Empty",
+                            "response": "google.protobuf.Empty",
+                            "options": {}
+                        }
+                    }
+                },
+                {
+                    "name": "BlockAPI",
+                    "options": {},
+                    "rpc": {
+                        "PutBlock": {
+                            "request": "PutBlockRequest",
+                            "response": "BlockRefs",
+                            "options": {}
+                        },
+                        "GetBlock": {
+                            "request": "GetBlockRequest",
+                            "response": "google.protobuf.BytesValue",
+                            "options": {}
+                        },
+                        "DeleteBlock": {
+                            "request": "DeleteBlockRequest",
+                            "response": "google.protobuf.Empty",
+                            "options": {}
+                        },
+                        "InspectBlock": {
+                            "request": "InspectBlockRequest",
+                            "response": "BlockInfo",
+                            "options": {}
+                        },
+                        "ListBlock": {
+                            "request": "ListBlockRequest",
+                            "response": "BlockInfos",
+                            "options": {}
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}
