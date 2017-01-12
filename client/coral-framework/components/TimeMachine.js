@@ -18,15 +18,20 @@ export class TimeMachine extends Component {
 	loadCommits: PropTypes.func.isRequired,
   }
 
+  gbcConnection = null;
+
   constructor (props) {
     super(props);
     console.log('In time machine constructor');
-
+    let GBC = require("grpc-bus-websocket-client");
+    let serviceConfig = {pfs: {API: 'localhost:30650'}};
+    this.gbcConnection = new GBC("ws://localhost:8081/", 'pfs.proto.json', serviceConfig)
+     .connect()
   }
 
   componentDidMount () {
     console.log('Time machine mounted');
-	this.props.loadCommits();
+	this.props.loadCommits(this.gbcConnection);
   }
 
   loadTimestamp = (e) => {
@@ -38,7 +43,7 @@ export class TimeMachine extends Component {
 	console.log("Value of slider:", value);
 	this.props.updateCommitIndex(value);
 	console.log("Updated commit index");
-	this.props.refreshComments(this.props.items.commitInfos[value]);
+	this.props.refreshComments(this.gbcConnection, this.props.items.commitInfos[value]);
 	return false;
   }
 
@@ -84,8 +89,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  refreshComments: (commitId) => dispatch(getStreamFromPFS(commitId)),
-  loadCommits: () => dispatch(loadCommits()),
+  refreshComments: (gbcConnection, commitId) => dispatch(getStreamFromPFS(gbcConnection, commitId)),
+  loadCommits: (gbcConnection) => dispatch(loadCommits(gbcConnection)),
   updateCommitIndex: (index) => dispatch(updateCommitIndex(index)),
 });
 

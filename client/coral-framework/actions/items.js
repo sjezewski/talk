@@ -171,79 +171,60 @@ export function getStream (assetUrl) {
   };
 }
 
-export function getStreamFromPFS (commitInfo) {
+export function getStreamFromPFS (gbcConnection, commitInfo) {
   console.log("in getStreamFromPFS()");
   return (dispatch) => {
-    let GBC = require("grpc-bus-websocket-client");
-    let serviceConfig = {pfs: {API: 'localhost:30650'}};
-    console.log("GOING TO CONNECT TO WS OMG");
-	console.log("LOADING COMMENTS AT COMMIT:", commitInfo.commit.id);
-    new GBC("ws://localhost:8081/", 'pfs.proto.json', serviceConfig)
-     .connect()
-       .then(function(gbc) {
-         console.log("connected to WS, now going to request something");
-         let request = {
-			 file: {
-				commit: {
-					repo: {
-						name: "stream"
-					},
-					id: "master/1"
+     console.log("connected to WS, now going to request something");
+     let request = {
+		 file: {
+			commit: {
+				repo: {
+					name: "stream"
 				},
-				 path: "loremipsum.json"
-			 }
-         };
-         let a = gbc.services.pfs.API.getFile(request, function(err, res){
-             console.log("GOT PFS GET FILE RESULT!!!:");
-           console.log(res);
-		   let rawString = res.value.readString(
-				   res.value.limit-res.value.offset,
-				   undefined,
-				   res.value.offset);
-		   console.log(rawString);
-			let stream = JSON.parse(rawString.string)
-			console.log("got stream:", stream);
-			getStreamHelper(dispatch, stream);
-         });  // --> Hello Gabriel
-		 console.log("result of proxy request:", a);
+				id: commitInfo.commit.id
+			},
+			 path: "loremipsum.json"
+		 }
+     };
+	 gbcConnection.then(function(gbc) {
+       let a = gbc.services.pfs.API.getFile(request, function(err, res){
+         console.log("GOT PFS GET FILE RESULT!!!:");
+         console.log(res);
+	     let rawString = res.value.readString(
+	      	   res.value.limit-res.value.offset,
+	      	   undefined,
+	      	   res.value.offset);
+	     console.log(rawString);
+	      let stream = JSON.parse(rawString.string)
+	      console.log("got stream:", stream);
+	      getStreamHelper(dispatch, stream);
        });
-  
+	   console.log("result of proxy request:", a);
+	 });
   };
 }
 
-export function loadCommits() {
-
+export function loadCommits(gbcConnection) {
   return (dispatch) => {
-  
-    let GBC = require("grpc-bus-websocket-client");
-    console.log("yah");
-    //let request = {pachyderm: {pfs: {API: 'localhost:50051'}}}
-    let serviceConfig = {pfs: {API: 'localhost:30650'}};
-    console.log("GOING TO CONNECT TO WS OMG");
-    new GBC("ws://localhost:8081/", 'pfs.proto.json', serviceConfig)
-     .connect()
-       .then(function(gbc) {
-         console.log("connected to WS, now going to request something");
-         let request = {
-             include: [
-                  {
-                      repo: {
-  						name: "stream"
-  					}
-                  }
-             ],
-  		   exclude: [],
-  		   provenance: []
-         };
-         gbc.services.pfs.API.listCommit(request, function(err, res){
-             console.log("GOT PFS LIST COMMIT RESULT!!!:");
-			 console.log(res);
-			 dispatch(loadCommitsAction(res.commit_info));
-         });  // --> Hello Gabriel
-       });
-
-	// I was returning the commits ... but I don't think thats used anywhere?
-	return null;
+    console.log("connected to WS, now going to request something");
+    let request = {
+        include: [
+             {
+                 repo: {
+   				name: "stream"
+   			}
+             }
+        ],
+      exclude: [],
+      provenance: []
+    };
+	gbcConnection.then(function(gbc) {
+      gbc.services.pfs.API.listCommit(request, function(err, res){
+        console.log("GOT PFS LIST COMMIT RESULT!!!:");
+   	    console.log(res);
+   	    dispatch(loadCommitsAction(res.commit_info));
+      });
+	});
   };
 }
 
