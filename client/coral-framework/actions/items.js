@@ -200,6 +200,10 @@ export function getStreamFromPFS (gbcConnection, commitInfo) {
 	      getStreamHelper(dispatch, stream);
        });
 	   console.log("result of proxy request:", a);
+	   a.on("data", function() { console.log("SOME ARGS:", arguments);});
+	   a.on("end", function() { console.log("SOME ARGS end:", arguments);});
+	   a.on("error", function() { console.log("SOME ARGS error:", arguments);});
+	   a.on("status", function() { console.log("SOME ARGS status:", arguments);});
 	 });
   };
 }
