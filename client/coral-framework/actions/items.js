@@ -171,12 +171,13 @@ export function getStream (assetUrl) {
   };
 }
 
-export function getStreamFromPFS (commitID) {
+export function getStreamFromPFS (commitInfo) {
   console.log("in getStreamFromPFS()");
   return (dispatch) => {
     let GBC = require("grpc-bus-websocket-client");
     let serviceConfig = {pfs: {API: 'localhost:30650'}};
     console.log("GOING TO CONNECT TO WS OMG");
+	console.log("LOADING COMMENTS AT COMMIT:", commitInfo.commit.id);
     new GBC("ws://localhost:8081/", 'pfs.proto.json', serviceConfig)
      .connect()
        .then(function(gbc) {
@@ -187,12 +188,12 @@ export function getStreamFromPFS (commitID) {
 					repo: {
 						name: "stream"
 					},
-					id: "master/2"
+					id: "master/1"
 				},
 				 path: "loremipsum.json"
 			 }
          };
-         gbc.services.pfs.API.getFile(request, function(err, res){
+         let a = gbc.services.pfs.API.getFile(request, function(err, res){
              console.log("GOT PFS GET FILE RESULT!!!:");
            console.log(res);
 		   let rawString = res.value.readString(
@@ -201,8 +202,10 @@ export function getStreamFromPFS (commitID) {
 				   res.value.offset);
 		   console.log(rawString);
 			let stream = JSON.parse(rawString.string)
+			console.log("got stream:", stream);
 			getStreamHelper(dispatch, stream);
          });  // --> Hello Gabriel
+		 console.log("result of proxy request:", a);
        });
   
   };
