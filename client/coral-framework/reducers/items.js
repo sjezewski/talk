@@ -8,7 +8,7 @@ const initialState = fromJS({
   users: {},
   assets: {},
   actions: {},
-  commits: [],
+  commitInfos: [],
   commitIndex: 0,
 });
 
@@ -27,8 +27,8 @@ export default (state = initialState, action) => {
       }
     });
   case actions.LOAD_COMMITS:
-	console.log("Reducing LOAD_COMMITS action, setting:", action.commits);
-	return state.set("commits", action.commits);
+	console.log("Reducing LOAD_COMMITS action, setting:", action.commitInfos);
+	return state.set("commitInfos", action.commitInfos);
   case actions.UPDATE_COMMIT_INDEX:
     console.log("Reducing UPDATE_COMMIT_INDEX to :", action.index);
 	console.log("current state:", state);

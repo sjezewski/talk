@@ -38,14 +38,23 @@ export class TimeMachine extends Component {
 	console.log("Value of slider:", value);
 	this.props.updateCommitIndex(value);
 	console.log("Updated commit index");
-	this.props.refreshComments(this.props.items.commits[value]);
+	this.props.refreshComments(this.props.items.commitInfos[value]);
 	return false;
   }
 
   render () {
     console.log("in TM render()");
 	const commitIndex = this.props.items.commitIndex;
-	const currentCommit = this.props.items.commits[commitIndex];
+	const currentCommitInfo = this.props.items.commitInfos[commitIndex];
+    let rawTimestamp = currentCommitInfo ? currentCommitInfo.finished : null;
+    let d = new Date(0);
+    if (rawTimestamp !== null) {
+        d.setUTCSeconds(rawTimestamp.seconds.low);
+    }
+    const timestamp = rawTimestamp ? (d.toLocaleDateString() + " " + d.toLocaleTimeString()) : "?";
+
+    console.log("timestamp:", timestamp);
+    const commitID = currentCommitInfo ? currentCommitInfo.id : "?";
     return (
       <div className="tardis">
 	    <div className="control">
@@ -56,13 +65,13 @@ export class TimeMachine extends Component {
 			name='timeline'
 			value={commitIndex}
 			min='0'
-			max={this.props.items.commits.length - 1}
+			max={this.props.items.commitInfos.length - 1}
 			onChange={this.loadTimestamp}/>
 	    </div>
 		<div className="metadata">
 			<div className="stateInfo">
-			  <span> Time: {currentCommit ? currentCommit["started"] : '?'} </span>
-			  <span> Commit ID: {currentCommit ? currentCommit["id"] : '?'} </span>
+			  <span> Time: {timestamp} </span>
+			  <span> Commit ID: {commitID} </span>
 			</div>
 		</div>
       </div>

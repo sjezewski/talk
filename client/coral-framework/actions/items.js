@@ -12,10 +12,10 @@ export const APPEND_ITEM_ARRAY = 'APPEND_ITEM_ARRAY';
 export const LOAD_COMMITS = 'LOAD_COMMITS';
 export const UPDATE_COMMIT_INDEX = 'UPDATE_COMMIT_INDEX';
 
-export const loadCommitsAction = (commits) => {
+export const loadCommitsAction = (commitInfos) => {
 	return {
 		type: LOAD_COMMITS,
-		commits,
+		commitInfos,
 	}
 }
 
@@ -214,10 +214,38 @@ function PFSListCommit() {
 }
 
 export function loadCommits() {
+
   return (dispatch) => {
-	let commits = PFSListCommit();
-	dispatch(loadCommitsAction(commits));
-	return commits
+  
+    let GBC = require("grpc-bus-websocket-client");
+    console.log("yah");
+    //let request = {pachyderm: {pfs: {API: 'localhost:50051'}}}
+    let serviceConfig = {pfs: {API: 'localhost:30650'}};
+    console.log("GOING TO CONNECT TO WS OMG");
+    new GBC("ws://localhost:8081/", 'pfs.proto.json', serviceConfig)
+     .connect()
+       .then(function(gbc) {
+         console.log("connected to WS, now going to request something");
+         let request = {
+             include: [
+                  {
+                      repo: {
+  						name: "stream"
+  					}
+                  }
+             ],
+  		   exclude: [],
+  		   provenance: []
+         };
+         gbc.services.pfs.API.listCommit(request, function(err, res){
+             console.log("GOT PFS LIST COMMIT RESULT!!!:");
+			 console.log(res);
+			 dispatch(loadCommitsAction(res.commit_info));
+         });  // --> Hello Gabriel
+       });
+
+	// I was returning the commits ... but I don't think thats used anywhere?
+	return null;
   };
 }
 
