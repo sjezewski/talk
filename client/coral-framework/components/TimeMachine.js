@@ -54,7 +54,7 @@ export class TimeMachine extends Component {
     const timestamp = rawTimestamp ? (d.toLocaleDateString() + " " + d.toLocaleTimeString()) : "?";
 
     console.log("timestamp:", timestamp);
-    const commitID = currentCommitInfo ? currentCommitInfo.id : "?";
+    const commitID = currentCommitInfo ? currentCommitInfo.commit.id : "?";
     return (
       <div className="tardis">
 	    <div className="control">
