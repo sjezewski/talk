@@ -16,6 +16,7 @@ export class TimeMachine extends Component {
     items: PropTypes.object.isRequired,
     refreshComments: PropTypes.func.isRequired,
 	loadCommits: PropTypes.func.isRequired,
+    updateCommitIndex: PropTypes.func.isRequired,
   }
 
   gbcConnection = null;
@@ -60,6 +61,9 @@ export class TimeMachine extends Component {
 
     console.log("timestamp:", timestamp);
     const commitID = currentCommitInfo ? currentCommitInfo.commit.id : "?";
+    const comments = "blah"; //this.props.items.comments;
+    const actions  = "blah"; //this.props.items.actions;
+    const users    = "blah"; //this.props.items.users;
     return (
       <div className="tardis">
 	    <div className="control">
@@ -75,9 +79,21 @@ export class TimeMachine extends Component {
 	    </div>
 		<div className="metadata">
 			<div className="stateInfo">
-			  <span> Time: {timestamp} </span>
-			  <span> Commit ID: {commitID} </span>
+			  <div> Time: {timestamp} </div>
+			  <div> Commit ID: {commitID} </div>
 			</div>
+            <div className="comments">
+            Comments:
+            { comments } 
+            </div>
+            <div className="users">
+            Users:
+            { users }
+            </div>
+            <div className="actions">
+            Actions:
+            { actions }
+            </div>
 		</div>
       </div>
     );

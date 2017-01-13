@@ -227,6 +227,7 @@ export function loadCommits(gbcConnection) {
         console.log("GOT PFS LIST COMMIT RESULT!!!:");
    	    console.log(res);
    	    dispatch(loadCommitsAction(res.commit_info));
+		dispatch(getStreamFromPFS(gbcConnection, res.commit_info[0]));
       });
 	});
   };
