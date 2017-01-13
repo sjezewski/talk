@@ -62,9 +62,9 @@ export class TimeMachine extends Component {
 
     console.log("timestamp:", timestamp);
     const commitID = currentCommitInfo ? currentCommitInfo.commit.id : "?";
-    const comments = "blah"; //this.props.items.comments;
-    const actions  = "blah"; //this.props.items.actions;
-    const users    = "blah"; //this.props.items.users;
+    const comments = this.props.items.metrics.comments;
+    const actions  = this.props.items.metrics.actions;
+    const users    = this.props.items.metrics.users;
     return (
       <div className="tardis">
 	    <div className="control">
@@ -85,15 +85,30 @@ export class TimeMachine extends Component {
 			</div>
             <div className="comments">
             Comments:
-            { comments } 
+            { 
+                comments ? Object.keys(comments).map(function(k) {
+                    return <div><div>{k}</div><div>{comments[k]}</div></div>;
+                })
+                : ""
+            }   
             </div>
             <div className="users">
             Users:
-            { users }
+            { 
+                users ? Object.keys(users).map(function(k) {
+                    return <div><div>{k}</div><div>{users[k]}</div></div>;
+                })
+                : ""
+            }   
             </div>
             <div className="actions">
             Actions:
-            { actions }
+            { 
+                actions ? Object.keys(actions).map(function(k) {
+                    return <div><div>{k}</div><div>{actions[k]}</div></div>;
+                })
+                : ""
+            }   
             </div>
 		</div>
       </div>
@@ -106,9 +121,9 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  refreshComments: (gbcConnection, commitID) => {
-      dispatch(getStreamFromPFS(gbcConnection, commitID))
-      dispatch(updateMetrics(gbcConnection, commitID))
+  refreshComments: (gbcConnection, commitInfo) => {
+      dispatch(getStreamFromPFS(gbcConnection, commitInfo))
+      dispatch(updateMetrics(gbcConnection, commitInfo))
   },
   loadCommits: (gbcConnection) => dispatch(loadCommits(gbcConnection)),
   updateCommitIndex: (index) => dispatch(updateCommitIndex(index)),
