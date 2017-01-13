@@ -87,43 +87,43 @@ export class TimeMachine extends Component {
             Comments:
             { 
                 comments ? Object.keys(comments).map(function(k) {
-                    return <div><div>{k}</div><div>{comments[k]}</div></div>;
-                })
-                : ""
-            }   
-            </div>
-            <div className="users">
-            Users:
-            { 
-                users ? Object.keys(users).map(function(k) {
-                    return <div><div>{k}</div><div>{users[k]}</div></div>;
-                })
-                : ""
-            }   
-            </div>
-            <div className="actions">
-            Actions:
-            { 
-                actions ? Object.keys(actions).map(function(k) {
-                    return <div><div>{k}</div><div>{actions[k]}</div></div>;
-                })
-                : ""
-            }   
-            </div>
-		</div>
-      </div>
-    );
-  }
+                return <span> &nbsp; &nbsp; <span>{k}: </span><span>{comments[k]}</span></span>;
+            })
+            : ""
+        }   
+        </div>
+        <div className="users">
+        Users:
+        { 
+            users ? Object.keys(users).map(function(k) {
+                return <span> &nbsp; &nbsp; <span>{k}: </span><span>{users[k]}</span></span>;
+            })
+            : ""
+        }   
+        </div>
+        <div className="actions">
+        Actions:
+        { 
+            actions ? Object.keys(actions).map(function(k) {
+                return <span> &nbsp; &nbsp; <span>{k}: </span><span>{actions[k]}</span></span>;
+            })
+            : ""
+        }   
+        </div>
+    </div>
+  </div>
+);
+}
 }
 
 const mapStateToProps = state => ({
-  items: state.items.toJS(),
+items: state.items.toJS(),
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  refreshComments: (gbcConnection, commitInfo) => {
-      dispatch(getStreamFromPFS(gbcConnection, commitInfo))
-      dispatch(updateMetrics(gbcConnection, commitInfo))
+refreshComments: (gbcConnection, commitInfo) => {
+  dispatch(getStreamFromPFS(gbcConnection, commitInfo))
+  dispatch(updateMetrics(gbcConnection, commitInfo))
   },
   loadCommits: (gbcConnection) => dispatch(loadCommits(gbcConnection)),
   updateCommitIndex: (index) => dispatch(updateCommitIndex(index)),
