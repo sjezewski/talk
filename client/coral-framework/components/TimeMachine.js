@@ -8,7 +8,7 @@ import {
   notificationActions,
   authActions
 } from '../../coral-framework';
-const {addItem, updateItem, postItem, getStream, getStreamFromPFS, loadCommits, updateCommitIndex, postAction, deleteAction, appendItemArray} = itemActions;
+const {addItem, updateItem, postItem, getStream, getStreamFromPFS, loadCommits, updateCommitIndex, updateMetrics, postAction, deleteAction, appendItemArray} = itemActions;
 
 export class TimeMachine extends Component {
 
@@ -17,6 +17,7 @@ export class TimeMachine extends Component {
     refreshComments: PropTypes.func.isRequired,
 	loadCommits: PropTypes.func.isRequired,
     updateCommitIndex: PropTypes.func.isRequired,
+    updateMetrics: PropTypes.func.isRequired,
   }
 
   gbcConnection = null;
@@ -105,9 +106,13 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  refreshComments: (gbcConnection, commitId) => dispatch(getStreamFromPFS(gbcConnection, commitId)),
+  refreshComments: (gbcConnection, commitID) => {
+      dispatch(getStreamFromPFS(gbcConnection, commitID))
+      dispatch(updateMetrics(gbcConnection, commitID))
+  },
   loadCommits: (gbcConnection) => dispatch(loadCommits(gbcConnection)),
   updateCommitIndex: (index) => dispatch(updateCommitIndex(index)),
+  updateMetrics: (gbcConnection, streamCommitID) => dispatch(updateMetrics(gbcConnection, commitID)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TimeMachine);

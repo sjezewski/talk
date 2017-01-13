@@ -10,6 +10,7 @@ const initialState = fromJS({
   actions: {},
   commitInfos: [],
   commitIndex: 0,
+  metrics: {},
 });
 
 export default (state = initialState, action) => {
@@ -33,6 +34,9 @@ export default (state = initialState, action) => {
     console.log("Reducing UPDATE_COMMIT_INDEX to :", action.index);
 	console.log("current state:", state);
 	return state.set("commitIndex", action.index);
+  case actions.UPDATE_METRICS:
+    console.log("Reducing UPDATE_METRICS to: ", action.metrics);
+    return state.set("metrics", action.metrics);
   default:
     return state;
   }

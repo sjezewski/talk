@@ -11,6 +11,7 @@ export const UPDATE_ITEM = 'UPDATE_ITEM';
 export const APPEND_ITEM_ARRAY = 'APPEND_ITEM_ARRAY';
 export const LOAD_COMMITS = 'LOAD_COMMITS';
 export const UPDATE_COMMIT_INDEX = 'UPDATE_COMMIT_INDEX';
+export const UPDATE_METRICS = 'UPDATE_METRICS';
 
 export const loadCommitsAction = (commitInfos) => {
 	return {
@@ -23,6 +24,13 @@ export const updateCommitIndex = (index) => {
 	return {
 		type: UPDATE_COMMIT_INDEX,
 		index,
+	}
+}
+
+export const updateMetricsAction = (metrics) => {
+	return {
+		type: UPDATE_METRICS,
+		metrics,
 	}
 }
 
@@ -175,17 +183,10 @@ export function getStreamFromPFS (gbcConnection, commitInfo) {
   console.log("in getStreamFromPFS()");
   return (dispatch) => {
      console.log("connected to WS, now going to request something");
-     let request = {
-		 file: {
-			commit: {
-				repo: {
-					name: "stream"
-				},
-				id: commitInfo.commit.id
-			},
-			 path: "loremipsum.json"
-		 }
-     };
+     let request = getFileRequest(
+			 "stream",
+			 commitInfo.commit.id,
+			 "loremipsum.json");
 	 gbcConnection.then(function(gbc) {
        let a = gbc.services.pfs.API.getFile(request, function(err, res){
          console.log("GOT PFS GET FILE RESULT!!!:");
@@ -228,9 +229,80 @@ export function loadCommits(gbcConnection) {
    	    console.log(res);
    	    dispatch(loadCommitsAction(res.commit_info));
 		dispatch(getStreamFromPFS(gbcConnection, res.commit_info[0]));
+		dispatch(updateMetrics(gbcConnection, res.commit_info[0]));
       });
 	});
   };
+}
+
+function flushCommitRequest(repo, commitID) {
+	return {
+			commit: [
+			{
+				repo: {
+					name: repo
+				},
+				id: commitID
+			}
+			],
+			to_repo: [],	
+		}
+}
+
+function getFileRequest(repo, commitID, file) {
+	return {
+		 file: {
+			commit: {
+				repo: {
+					name: repo
+				},
+				id: commitID
+			},
+			 path: file
+		 }
+     }
+}
+
+export function updateMetrics(gbcConnection, commitInfo) {
+	return (dispatch) => {
+		let flushRequest = flushCommitRequest("stream", commitInfo.commit.id);
+		console.log("flush request:", flushRequest);
+		gbcConnection.then(function(gbc) {
+			gbc.services.pfs.API.flushCommit(
+					flushRequest, 
+					function(err, res) {
+						console.log("GOT FLUSH COMMIT RESPONSE");
+						console.log(res);
+						let metricsCommitID = "";
+						for(var i=0; i < res.commit_info.length; i++) {
+							var thisCommitInfo = res.commit_info[i];
+							if (thisCommitInfo.commit.repo.name == "metrics") {
+								metricsCommitID = thisCommitInfo.commit.id;
+							}
+						}
+						console.log("Got metrics commit ID[",
+								metricsCommitID,"]");
+						
+						gbc.services.pfs.API.getFile(
+							getFileRequest("metrics", metricsCommitID,
+								"loremipsum.json"),
+							function(err, res) {
+								console.log("GOT GET FILE RESPONSE:");
+								console.log(res);
+	                            let rawString = res.value.readString(
+	                             	   res.value.limit-res.value.offset,
+	                             	   undefined,
+	                             	   res.value.offset);
+	                            console.log(rawString);
+	                            let metrics = JSON.parse(rawString.string)
+								dispatch(updateMetricsAction(metrics));
+
+							}
+						);
+					}
+			);
+		});
+	}
 }
 
 /*
