@@ -24,6 +24,9 @@ export class TimeMachine extends Component {
 
   constructor (props) {
     super(props);
+    if (window.location.pathname != "/timemachine") {
+        return
+    }
     console.log('In time machine constructor');
     let GBC = require("grpc-bus-websocket-client");
     let serviceConfig = {pfs: {API: 'localhost:30650'}};
@@ -32,11 +35,17 @@ export class TimeMachine extends Component {
   }
 
   componentDidMount () {
+    if (window.location.pathname != "/timemachine") {
+        return
+    }
     console.log('Time machine mounted');
 	this.props.loadCommits(this.gbcConnection);
   }
 
   loadTimestamp = (e) => {
+    if (window.location.pathname != "/timemachine") {
+        return
+    }
     console.log('Going to update the comments');
     console.log('Got value:', e);
 	console.log('this:', this);
@@ -65,6 +74,9 @@ export class TimeMachine extends Component {
     const comments = this.props.items.metrics.comments;
     const actions  = this.props.items.metrics.actions;
     const users    = this.props.items.metrics.users;
+    console.log("users:", users);
+    console.log("actions:", actions);
+    console.log("comments:", comments);
     return (
       <div className="tardis">
 	    <div className="control">
